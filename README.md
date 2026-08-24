@@ -13,6 +13,8 @@ A QR Code Based Smart Attendance Management System built using Python, Flask, SQ
 🗄️ SQLite database for data storage
 📊 Automatic Excel attendance records
 📥 Excel download from the teacher dashboard
+
+
 🛠️ Technologies Used
 Python
 Flask
@@ -22,6 +24,8 @@ QRCode
 OpenPyXL
 UUID
 Jinja2
+
+
 🔄 How It Works
 Teacher Creates Session
         ↓
@@ -42,6 +46,8 @@ Attendance Recorded
 SQLite + Excel
         ↓
 Teacher Dashboard
+
+
 📂 Project Structure
 QR-Attendance-System/
 │
@@ -63,6 +69,8 @@ QR-Attendance-System/
 │   └── qr_codes/
 │
 └── attendance_excel/
+
+
 ⚙️ Installation
 pip install -r requirements.txt
 
@@ -73,6 +81,8 @@ python app.py
 Then open:
 
 http://127.0.0.1:5000
+
+
 🎯 Example
 
 If the teacher sets:
@@ -87,6 +97,8 @@ The system allows attendance until:
 
 After reaching the limit, the session automatically becomes CLOSED.
 
+
+
 🔮 Future Improvements
 Face recognition
 GPS/location verification
@@ -95,6 +107,7 @@ Attendance percentage calculation
 Admin dashboard
 Cloud database
 Daily/weekly/monthly reports
+
 👨‍💻 Project
 
 QR Code Based Smart Attendance Management System
