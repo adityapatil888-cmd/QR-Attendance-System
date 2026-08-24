@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Teacher - Create Session</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <style>
+
+        /* =========================================
+           QR ATTENDANCE SYSTEM
+           TEACHER SESSION PAGE
+           ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 80% 20%,
+                    rgba(38, 240, 174, 0.06),
+                    transparent 30%
+                ),
+                #303b72;
+
+            color: #ffffff;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        /* =========================================
+           NAVBAR
+           ========================================= */
+
+        .navbar {
+            width: 100%;
+
+            padding: 18px 7%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            background: transparent;
+        }
+
+
+        /* LOGO */
+
+        .logo {
+            color: #2bf2b0;
+
+            font-size: 24px;
+
+            font-weight: 800;
+
+            letter-spacing: -0.7px;
+
+            position: relative;
+        }
+
+        .logo::after {
+            content: "";
+
+            position: absolute;
+
+            width: 7px;
+            height: 7px;
+
+            background: #2bf2b0;
+
+            border-radius: 50%;
+
+            right: -11px;
+            top: 5px;
+
+            box-shadow:
+                0 0 10px rgba(43, 242, 176, 0.7);
+        }
+
+
+        /* =========================================
+           NAVIGATION
+           ========================================= */
+
+        .nav-links {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+
+            color: #d9e0f4;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            padding: 7px 14px;
+
+            border: 1px solid transparent;
+
+            border-radius: 8px;
+
+            transition:
+                color 0.25s ease,
+                background 0.25s ease,
+                border-color 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: #2bf2b0;
+
+            border-color:
+                rgba(43, 242, 176, 0.45);
+
+            background:
+                rgba(43, 242, 176, 0.06);
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================================
+           MAIN CONTAINER
+           ========================================= */
+
+        .container {
+            width: 100%;
+
+            max-width: 900px;
+
+            margin: auto;
+
+            padding: 30px 30px 40px;
+
+            flex: 1;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        /* =========================================
+           CARD
+           ========================================= */
+
+        .card {
+            width: 100%;
+
+            max-width: 650px;
+
+            padding: 38px 42px;
+
+            background:
+                rgba(255, 255, 255, 0.025);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.07);
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 15px 45px
+                rgba(0, 0, 0, 0.12);
+        }
+
+
+        /* =========================================
+           GREEN ACCENT
+           ========================================= */
+
+        .card::before {
+            content: "";
+
+            display: block;
+
+            width: 52px;
+
+            height: 4px;
+
+            margin-bottom: 20px;
+
+            border-radius: 20px;
+
+            background: #2bf2b0;
+
+            box-shadow:
+                0 0 15px
+                rgba(43, 242, 176, 0.35);
+        }
+
+
+        /* =========================================
+           TITLE
+           ========================================= */
+
+        .title {
+            color: #2bf2b0;
+
+            font-size: 36px;
+
+            line-height: 1.15;
+
+            font-weight: 800;
+
+            letter-spacing: -1px;
+
+            margin-bottom: 10px;
+        }
+
+
+        /* =========================================
+           SUBTITLE
+           ========================================= */
+
+        .subtitle {
+            color: #d7dcef;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            margin-bottom: 24px;
+        }
+
+
+        /* =========================================
+           FLASH MESSAGE
+           ========================================= */
+
+        .alert {
+            padding: 11px 14px;
+
+            margin-bottom: 18px;
+
+            color: #2bf2b0;
+
+            background:
+                rgba(43, 242, 176, 0.07);
+
+            border:
+                1px solid
+                rgba(43, 242, 176, 0.35);
+
+            border-radius: 6px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================================
+           FORM
+           ========================================= */
+
+        form {
+            width: 100%;
+        }
+
+
+        /* =========================================
+           FORM GROUP
+           ========================================= */
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+
+        /* LABEL */
+
+        label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #ffffff;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================================
+           INPUTS
+           ========================================= */
+
+        input {
+            width: 100%;
+
+            padding: 12px 14px;
+
+            color: #ffffff;
+
+            background:
+                rgba(255, 255, 255, 0.045);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.12);
+
+            border-radius: 6px;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            transition:
+                border-color 0.25s ease,
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        input::placeholder {
+            color:
+                rgba(215, 220, 239, 0.45);
+        }
+
+        input:focus {
+            border-color: #2bf2b0;
+
+            background:
+                rgba(43, 242, 176, 0.035);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(43, 242, 176, 0.08);
+        }
+
+
+        /* TIME INPUT */
+
+        input[type="time"] {
+            color-scheme: dark;
+        }
+
+
+        /* NUMBER INPUT */
+
+        input[type="number"] {
+            color-scheme: dark;
+        }
+
+
+        /* =========================================
+           FORM DESCRIPTION
+           ========================================= */
+
+        .form-group .subtitle {
+            margin-top: 6px;
+
+            margin-bottom: 0;
+
+            color:
+                rgba(215, 220, 239, 0.55);
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================================
+           BUTTON
+           ========================================= */
+
+        .button {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            width: 100%;
+
+            margin-top: 5px;
+
+            padding: 13px 22px;
+
+            text-decoration: none;
+
+            border-radius: 6px;
+
+            background: #2bf2b0;
+
+            color: #263365;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            border: 1px solid #2bf2b0;
+
+            box-shadow:
+                0 5px 18px
+                rgba(43, 242, 176, 0.14);
+
+            cursor: pointer;
+
+            font-family: inherit;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+
+            background: #52f6c2;
+
+            box-shadow:
+                0 10px 25px
+                rgba(43, 242, 176, 0.25);
+        }
+
+        .button:active {
+            transform: translateY(0);
+        }
+
+
+        /* =========================================
+           ACCESSIBILITY
+           ========================================= */
+
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible {
+            outline:
+                2px solid #2bf2b0;
+
+            outline-offset: 3px;
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 768px) {
+
+            .navbar {
+                padding: 16px 5%;
+
+                flex-direction: column;
+
+                gap: 12px;
+            }
+
+            .nav-links {
+                width: 100%;
+
+                justify-content: center;
+
+                flex-wrap: wrap;
+            }
+
+            .container {
+                padding:
+                    25px 7% 35px;
+
+                align-items: flex-start;
+            }
+
+            .card {
+                padding: 30px 28px;
+            }
+
+            .title {
+                font-size: 32px;
+            }
+
+        }
+
+
+        /* =========================================
+           SMALL MOBILE
+           ========================================= */
+
+        @media (max-width: 480px) {
+
+            .navbar {
+                padding: 15px 18px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .nav-links {
+                gap: 3px;
+            }
+
+            .nav-links a {
+                padding: 7px 9px;
+
+                font-size: 12px;
+            }
+
+            .container {
+                padding:
+                    22px 18px 30px;
+            }
+
+            .card {
+                padding: 25px 20px;
+
+                border-radius: 10px;
+            }
+
+            .card::before {
+                margin-bottom: 16px;
+            }
+
+            .title {
+                font-size: 29px;
+
+                letter-spacing: -0.7px;
+            }
+
+            .subtitle {
+                font-size: 13px;
+
+                margin-bottom: 20px;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
+            }
+
+            input {
+                padding: 11px 12px;
+
+                font-size: 13px;
+            }
+
+            .button {
+                padding: 12px 18px;
+            }
+
+        }
+
+
+        /* =========================================
+           REDUCED MOTION
+           ========================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration:
+                    0.01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    0.01ms !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     NAVIGATION
+     ========================================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        QR Attendance
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('home') }}">
+            Home
+        </a>
+
+        <a href="{{ url_for('students') }}">
+            Students
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================================
+     MAIN CONTENT
+     ========================================= -->
+
+<div class="container">
+
+    <div class="card">
+
+        <h1 class="title">
+            Create Attendance Session
+        </h1>
+
+        <p class="subtitle">
+            Enter lecture information and generate
+            the classroom QR code.
+        </p>
+
+
+        {% with messages = get_flashed_messages() %}
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                    <div class="alert">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <form
+            action="{{ url_for('create_session') }}"
+            method="POST"
+        >
+
+            <div class="form-group">
+
+                <label>
+                    Subject Name
+                </label>
+
+                <input
+                    type="text"
+                    name="subject_name"
+                    placeholder="Example: Machine Learning"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Lecture Number
+                </label>
+
+                <input
+                    type="number"
+                    name="lecture_number"
+                    min="1"
+                    placeholder="Example: 5"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Lecture Time
+                </label>
+
+                <input
+                    type="time"
+                    name="lecture_time"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Total Students Present
+                </label>
+
+                <input
+                    type="number"
+                    name="student_limit"
+                    min="1"
+                    max="200"
+                    placeholder="Example: 30"
+                    required
+                >
+
+                <p class="subtitle">
+                    Maximum number of students allowed
+                    to mark attendance for this lecture.
+                </p>
+
+            </div>
+
+
+            <button
+                class="button"
+                type="submit"
+            >
+                Generate QR Code
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

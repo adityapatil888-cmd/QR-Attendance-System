@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Attendance Successful</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <style>
+
+        /* =========================================
+           QR ATTENDANCE SYSTEM
+           ATTENDANCE SUCCESS PAGE
+           ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 80% 20%,
+                    rgba(38, 240, 174, 0.06),
+                    transparent 30%
+                ),
+                #303b72;
+
+            color: #ffffff;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        /* =========================================
+           MAIN CONTAINER
+           ========================================= */
+
+        .container {
+            width: 100%;
+
+            max-width: 850px;
+
+            margin: auto;
+
+            padding: 30px;
+
+            flex: 1;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        /* =========================================
+           CARD
+           ========================================= */
+
+        .card {
+            width: 100%;
+
+            max-width: 620px;
+
+            padding: 42px 45px;
+
+            background:
+                rgba(255, 255, 255, 0.025);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.07);
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 15px 45px
+                rgba(0, 0, 0, 0.14);
+
+            text-align: center;
+
+            position: relative;
+
+            animation:
+                successAppear 0.6s ease forwards;
+        }
+
+
+        /* =========================================
+           GREEN ACCENT
+           ========================================= */
+
+        .card::before {
+            content: "";
+
+            display: block;
+
+            width: 52px;
+
+            height: 4px;
+
+            margin: 0 auto 25px;
+
+            border-radius: 20px;
+
+            background: #2bf2b0;
+
+            box-shadow:
+                0 0 15px
+                rgba(43, 242, 176, 0.35);
+        }
+
+
+        /* =========================================
+           SUCCESS ICON
+           ========================================= */
+
+        .success-icon {
+            width: 70px;
+
+            height: 70px;
+
+            margin: 0 auto 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background:
+                rgba(43, 242, 176, 0.10);
+
+            border:
+                2px solid
+                #2bf2b0;
+
+            color: #2bf2b0;
+
+            font-size: 38px;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 0 25px
+                rgba(43, 242, 176, 0.15);
+        }
+
+
+        /* =========================================
+           HEADING
+           ========================================= */
+
+        .card h1 {
+            color: #2bf2b0;
+
+            font-size:
+                clamp(28px, 5vw, 42px);
+
+            line-height: 1.15;
+
+            font-weight: 800;
+
+            letter-spacing: -1px;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* =========================================
+           SUCCESS MESSAGE
+           ========================================= */
+
+        .success {
+            display: inline-block;
+
+            margin-bottom: 25px;
+
+            padding: 9px 17px;
+
+            color: #2bf2b0;
+
+            background:
+                rgba(43, 242, 176, 0.07);
+
+            border:
+                1px solid
+                rgba(43, 242, 176, 0.3);
+
+            border-radius: 6px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================================
+           STUDENT DETAILS
+           ========================================= */
+
+        .card > p {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding: 11px 14px;
+
+            margin-bottom: 8px;
+
+            color: #d7dcef;
+
+            background:
+                rgba(255, 255, 255, 0.035);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.06);
+
+            border-radius: 6px;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+            text-align: right;
+        }
+
+        .card > p strong {
+            color: #ffffff;
+
+            font-weight: 700;
+
+            text-align: left;
+        }
+
+
+        /* =========================================
+           CLOSED STATUS
+           ========================================= */
+
+        .card > p.status-closed {
+            display: block;
+
+            margin-top: 16px;
+
+            margin-bottom: 0;
+
+            color: #ffcc70;
+
+            background:
+                rgba(255, 204, 112, 0.07);
+
+            border:
+                1px solid
+                rgba(255, 204, 112, 0.25);
+
+            text-align: center;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================================
+           ANIMATION
+           ========================================= */
+
+        @keyframes successAppear {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 600px) {
+
+            .container {
+                padding:
+                    20px 16px;
+            }
+
+            .card {
+                padding: 32px 20px;
+
+                border-radius: 10px;
+            }
+
+            .card::before {
+                margin-bottom: 20px;
+            }
+
+            .success-icon {
+                width: 62px;
+
+                height: 62px;
+
+                font-size: 34px;
+
+                margin-bottom: 16px;
+            }
+
+            .card h1 {
+                font-size: 28px;
+
+                letter-spacing: -0.7px;
+            }
+
+            .success {
+                font-size: 13px;
+
+                margin-bottom: 20px;
+            }
+
+            .card > p {
+                padding: 10px 11px;
+
+                font-size: 13px;
+
+                gap: 10px;
+            }
+
+        }
+
+
+        /* =========================================
+           SMALL MOBILE
+           ========================================= */
+
+        @media (max-width: 400px) {
+
+            .card {
+                padding: 28px 15px;
+            }
+
+            .card h1 {
+                font-size: 25px;
+            }
+
+            .card > p {
+                font-size: 12px;
+            }
+
+        }
+
+
+        /* =========================================
+           REDUCED MOTION
+           ========================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration:
+                    0.01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    0.01ms !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     MAIN CONTENT
+     ========================================= -->
+
+<div class="container">
+
+    <div class="card center">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h1>
+            Attendance Marked Successfully
+        </h1>
+
+        <div class="success">
+
+            You are marked Present.
+
+        </div>
+
+
+        <p>
+            <strong>Name:</strong>
+            {{ student_name }}
+        </p>
+
+
+        <p>
+            <strong>Roll Number:</strong>
+            {{ roll_number }}
+        </p>
+
+
+        <p>
+            <strong>Subject:</strong>
+            {{ session["subject_name"] }}
+        </p>
+
+
+        <p>
+            <strong>Lecture:</strong>
+            {{ session["lecture_number"] }}
+        </p>
+
+
+        <p>
+            <strong>Present:</strong>
+            {{ session["attendance_count"] }}
+            /
+            {{ session["student_limit"] }}
+        </p>
+
+
+        {% if session["status"] == "CLOSED" %}
+
+            <p class="status-closed">
+                Attendance limit reached.
+            </p>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>

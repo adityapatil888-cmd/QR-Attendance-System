@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Attendance QR Code</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <style>
+
+        /* =========================================
+           QR ATTENDANCE SYSTEM
+           QR CODE DISPLAY PAGE
+           ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 80% 20%,
+                    rgba(38, 240, 174, 0.06),
+                    transparent 30%
+                ),
+                #303b72;
+
+            color: #ffffff;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        /* =========================================
+           NAVBAR
+           ========================================= */
+
+        .navbar {
+            width: 100%;
+
+            padding: 18px 7%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            background: transparent;
+        }
+
+
+        /* LOGO */
+
+        .logo {
+            color: #2bf2b0;
+
+            font-size: 24px;
+
+            font-weight: 800;
+
+            letter-spacing: -0.7px;
+
+            position: relative;
+        }
+
+        .logo::after {
+            content: "";
+
+            position: absolute;
+
+            width: 7px;
+            height: 7px;
+
+            background: #2bf2b0;
+
+            border-radius: 50%;
+
+            right: -11px;
+            top: 5px;
+
+            box-shadow:
+                0 0 10px rgba(43, 242, 176, 0.7);
+        }
+
+
+        /* =========================================
+           NAVIGATION
+           ========================================= */
+
+        .nav-links {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+
+            color: #d9e0f4;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            padding: 7px 14px;
+
+            border: 1px solid transparent;
+
+            border-radius: 8px;
+
+            transition:
+                color 0.25s ease,
+                background 0.25s ease,
+                border-color 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: #2bf2b0;
+
+            border-color:
+                rgba(43, 242, 176, 0.45);
+
+            background:
+                rgba(43, 242, 176, 0.06);
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================================
+           MAIN CONTAINER
+           ========================================= */
+
+        .container {
+            width: 100%;
+
+            max-width: 1000px;
+
+            margin: auto;
+
+            padding: 25px 30px 35px;
+
+            flex: 1;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+      /* =========================================
+           PROJECT CREDIT
+           ========================================= */
+
+        .project-credit {
+            margin-top: 30px;
+
+            padding-top: 18px;
+
+            border-top:
+                1px solid
+                rgba(255, 255, 255, 0.08);
+
+            text-align: center;
+        }
+
+        .project-credit .project-by {
+            color: #ffffff;
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+            margin-bottom: 5px;
+        }
+
+        .project-credit .department {
+            color: #bfc8e5;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+            margin-bottom: 12px;
+        }
+
+        .linkedin-button {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 8px 17px;
+
+            border: 1px solid
+                rgba(43, 242, 176, 0.7);
+
+            border-radius: 6px;
+
+            color: #2bf2b0;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            transition:
+                background 0.25s ease,
+                color 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .linkedin-button:hover {
+            background: #2bf2b0;
+
+            color: #263365;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+
+        .footer {
+            width: 100%;
+
+            padding: 12px 7%;
+
+            color:
+                rgba(215, 220, 239, 0.45);
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            text-align: left;
+
+            border-top:
+                1px solid
+                rgba(255, 255, 255, 0.04);
+        }
+
+        /* =========================================
+           GREEN ACCENT
+           ========================================= */
+
+        .card::before {
+            content: "";
+
+            display: block;
+
+            width: 52px;
+
+            height: 4px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 20px;
+
+            background: #2bf2b0;
+
+            box-shadow:
+                0 0 15px
+                rgba(43, 242, 176, 0.35);
+        }
+
+
+        /* =========================================
+           SESSION TITLE
+           ========================================= */
+
+        .projector h1 {
+            color: #2bf2b0;
+
+            font-size:
+                clamp(30px, 5vw, 48px);
+
+            line-height: 1.1;
+
+            font-weight: 800;
+
+            letter-spacing: -1.5px;
+
+            margin-bottom: 8px;
+        }
+
+        .projector > p {
+            color: #d7dcef;
+
+            font-size: 15px;
+
+            line-height: 1.6;
+
+            margin-bottom: 24px;
+        }
+
+
+        /* =========================================
+           STATISTICS
+           ========================================= */
+
+        .stats {
+            width: 100%;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 12px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .stat {
+            padding: 17px 10px;
+
+            background:
+                rgba(43, 242, 176, 0.035);
+
+            border:
+                1px solid
+                rgba(43, 242, 176, 0.16);
+
+            border-radius: 8px;
+
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease,
+                background 0.25s ease;
+        }
+
+        .stat:hover {
+            transform: translateY(-2px);
+
+            border-color:
+                rgba(43, 242, 176, 0.4);
+
+            background:
+                rgba(43, 242, 176, 0.06);
+        }
+
+
+        .stat-number {
+            color: #2bf2b0;
+
+            font-size: 28px;
+
+            line-height: 1;
+
+            font-weight: 800;
+
+            margin-bottom: 7px;
+        }
+
+        .stat-label {
+            color: #bfc8e5;
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            letter-spacing: 0.3px;
+        }
+
+
+        /* =========================================
+           QR CONTAINER
+           ========================================= */
+
+        .qr-container {
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 22px;
+
+            background:
+                rgba(255, 255, 255, 0.035);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.08);
+
+            border-radius: 10px;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* QR IMAGE */
+
+        .qr-container img {
+            display: block;
+
+            width: 280px;
+
+            height: 280px;
+
+            max-width: 100%;
+
+            object-fit: contain;
+
+            padding: 10px;
+
+            background: #ffffff;
+
+            border-radius: 8px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0, 0, 0, 0.2);
+        }
+
+
+        /* QR TITLE */
+
+        .qr-container h2 {
+            margin-top: 16px;
+
+            color: #ffffff;
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+            line-height: 1.4;
+        }
+
+
+        /* =========================================
+           BUTTONS
+           ========================================= */
+
+        .button {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-width: 190px;
+
+            margin: 5px 5px;
+
+            padding: 12px 20px;
+
+            text-decoration: none;
+
+            border-radius: 6px;
+
+            background: #2bf2b0;
+
+            color: #263365;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            border: 1px solid #2bf2b0;
+
+            box-shadow:
+                0 5px 18px
+                rgba(43, 242, 176, 0.14);
+
+            cursor: pointer;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease,
+                color 0.25s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+
+            background: #52f6c2;
+
+            color: #263365;
+
+            box-shadow:
+                0 10px 25px
+                rgba(43, 242, 176, 0.25);
+        }
+
+        .button:active {
+            transform: translateY(0);
+        }
+
+
+        /* SECOND BUTTON */
+
+        .button-green {
+            background: transparent;
+
+            color: #2bf2b0;
+
+            border-color: #2bf2b0;
+
+            box-shadow: none;
+        }
+
+        .button-green:hover {
+            background: #2bf2b0;
+
+            color: #263365;
+
+            box-shadow:
+                0 10px 25px
+                rgba(43, 242, 176, 0.2);
+        }
+
+
+        /* =========================================
+           ACCESSIBILITY
+           ========================================= */
+
+        a:focus-visible {
+            outline:
+                2px solid #2bf2b0;
+
+            outline-offset: 4px;
+        }
+
+
+        /* =========================================
+           TABLET
+           ========================================= */
+
+        @media (max-width: 768px) {
+
+            .navbar {
+                padding: 16px 5%;
+
+                flex-direction: column;
+
+                gap: 12px;
+            }
+
+            .nav-links {
+                width: 100%;
+
+                justify-content: center;
+
+                flex-wrap: wrap;
+            }
+
+            .container {
+                padding:
+                    25px 7% 35px;
+
+                align-items: flex-start;
+            }
+
+            .card {
+                padding: 30px 25px;
+            }
+
+            .stats {
+                gap: 8px;
+            }
+
+            .qr-container img {
+                width: 250px;
+
+                height: 250px;
+            }
+
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 480px) {
+
+            .navbar {
+                padding: 15px 18px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .nav-links {
+                gap: 3px;
+            }
+
+            .nav-links a {
+                padding: 7px 9px;
+
+                font-size: 12px;
+            }
+
+            .container {
+                padding:
+                    20px 16px 30px;
+            }
+
+            .card {
+                padding: 25px 16px;
+
+                border-radius: 10px;
+            }
+
+            .projector h1 {
+                font-size: 30px;
+
+                letter-spacing: -0.8px;
+            }
+
+            .projector > p {
+                font-size: 13px;
+
+                margin-bottom: 18px;
+            }
+
+            .stats {
+                grid-template-columns:
+                    repeat(3, 1fr);
+
+                gap: 6px;
+
+                margin-bottom: 18px;
+            }
+
+            .stat {
+                padding: 12px 5px;
+            }
+
+            .stat-number {
+                font-size: 22px;
+            }
+
+            .stat-label {
+                font-size: 9px;
+            }
+
+            .qr-container {
+                padding: 15px;
+
+                margin-bottom: 15px;
+            }
+
+            .qr-container img {
+                width: 220px;
+
+                height: 220px;
+            }
+
+            .qr-container h2 {
+                font-size: 14px;
+
+                margin-top: 12px;
+            }
+
+            .button {
+                width: 100%;
+
+                margin: 5px 0;
+
+                padding: 12px 18px;
+            }
+
+        }
+
+
+        /* =========================================
+           REDUCED MOTION
+           ========================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration:
+                    0.01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    0.01ms !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     NAVIGATION
+     ========================================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        QR Attendance
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('teacher') }}">
+            New Session
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================================
+     MAIN CONTENT
+     ========================================= -->
+
+<div class="container">
+
+    <div class="card projector">
+
+        <h1>
+            {{ subject_name }}
+        </h1>
+
+        <p>
+            Lecture {{ lecture_number }}
+            |
+            {{ lecture_time }}
+        </p>
+
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <div class="stat-number">
+                    {{ student_limit }}
+                </div>
+
+                <div class="stat-label">
+                    Students Allowed
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-number">
+                    0
+                </div>
+
+                <div class="stat-label">
+                    Present
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-number">
+                    {{ student_limit }}
+                </div>
+
+                <div class="stat-label">
+                    Remaining
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="qr-container">
+
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='qr_codes/' + qr_filename
+                ) }}"
+                alt="Attendance QR Code"
+            >
+
+            <h2>
+                Scan QR Code to Mark Attendance
+            </h2>
+
+        </div>
+
+
+        <br>
+
+
+        <a
+            class="button"
+            href="{{ url_for(
+                'teacher_attendance',
+                session_id=session_id
+            ) }}"
+        >
+            Open Teacher Dashboard
+        </a>
+
+
+        <a
+            class="button button-green"
+            href="{{ url_for(
+                'student_attendance',
+                session_id=session_id
+            ) }}"
+        >
+            Test Student Page
+        </a>
+ <!-- =====================================
+             PROJECT CREDIT
+             ===================================== -->
+
+        <div class="project-credit">
+
+            <div class="project-by">
+                Project by Aditya B. Patil
+            </div>
+
+            <div class="department">
+                Electrical Engineering 
+                <br>
+                Minor in Artificial Intelligence &amp; Data Science
+            </div>
+
+            <a
+                class="linkedin-button"
+                href="https://www.linkedin.com/in/aditya-patil-876b65313"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                View LinkedIn Profile
+            </a>
+
+        </div>
+
+    </div>
+    
+
+
+</div>
+<!-- =========================================
+     FOOTER
+     ========================================= -->
+
+<div class="footer">
+
+    QR Attendance System . 
+    Project by Aditya B Patil .
+Electrical Engineering .
+Minor in AI & DS
+
+</div>
+
+
+</body>
+
+</html>

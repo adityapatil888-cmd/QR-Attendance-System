@@ -1,0 +1,902 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(38, 240, 174, 0.06),
+            transparent 30%
+        ),
+        #303b72;
+
+    color: #ffffff;
+}
+
+
+/* =========================================
+   LINKS
+   ========================================= */
+
+a {
+    text-decoration: none;
+}
+
+
+/* =========================================
+   NAVBAR
+   ========================================= */
+
+.navbar {
+    width: 100%;
+
+    background: transparent;
+
+    color: white;
+
+    padding: 20px 7%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+/* =========================================
+   LOGO
+   ========================================= */
+
+.logo {
+    color: #2bf2b0;
+
+    font-size: 24px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.7px;
+
+    position: relative;
+}
+
+.logo::after {
+    content: "";
+
+    position: absolute;
+
+    width: 7px;
+    height: 7px;
+
+    background: #2bf2b0;
+
+    border-radius: 50%;
+
+    right: -11px;
+    top: 5px;
+
+    box-shadow:
+        0 0 10px rgba(43, 242, 176, 0.7);
+}
+
+
+/* =========================================
+   NAVIGATION LINKS
+   ========================================= */
+
+.nav-links {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+}
+
+.nav-links a {
+    color: #d9e0f4;
+
+    margin-left: 4px;
+
+    padding: 8px 14px;
+
+    border: 1px solid transparent;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition:
+        color 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.nav-links a:hover {
+    color: #2bf2b0;
+
+    border-color:
+        rgba(43, 242, 176, 0.45);
+
+    background:
+        rgba(43, 242, 176, 0.06);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   CONTAINER
+   ========================================= */
+
+.container {
+    width: 90%;
+
+    max-width: 1100px;
+
+    margin: 40px auto;
+
+    position: relative;
+}
+
+
+/* =========================================
+   CARD
+   ========================================= */
+
+.card {
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    padding: 30px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 15px 45px
+        rgba(0, 0, 0, 0.14);
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================================
+   HERO
+   ========================================= */
+
+.hero {
+    text-align: center;
+
+    padding: 70px 20px;
+}
+
+.hero h1 {
+    font-size: 42px;
+
+    margin-bottom: 15px;
+
+    color: #2bf2b0;
+
+    font-weight: 800;
+
+    letter-spacing: -1.5px;
+}
+
+.hero p {
+    color: #d7dcef;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   BUTTON
+   ========================================= */
+
+.button {
+    display: inline-block;
+
+    border: 1px solid #2bf2b0;
+
+    border-radius: 6px;
+
+    padding: 13px 22px;
+
+    background: #2bf2b0;
+
+    color: #263365;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    margin: 5px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(43, 242, 176, 0.14);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease,
+        color 0.25s ease;
+}
+
+.button:hover {
+    background: #52f6c2;
+
+    color: #263365;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px
+        rgba(43, 242, 176, 0.25);
+}
+
+
+/* =========================================
+   GREEN OUTLINE BUTTON
+   ========================================= */
+
+.button-green {
+    background: transparent;
+
+    color: #2bf2b0;
+
+    border-color: #2bf2b0;
+
+    box-shadow: none;
+}
+
+.button-green:hover {
+    background: #2bf2b0;
+
+    color: #263365;
+
+    box-shadow:
+        0 10px 25px
+        rgba(43, 242, 176, 0.2);
+}
+
+
+/* =========================================
+   RED BUTTON
+   ========================================= */
+
+.button-red {
+    background:
+        rgba(255, 91, 91, 0.06);
+
+    color: #ff8585;
+
+    border-color:
+        rgba(255, 91, 91, 0.4);
+
+    box-shadow: none;
+}
+
+.button-red:hover {
+    background: #e95d68;
+
+    color: #ffffff;
+
+    border-color: #e95d68;
+
+    box-shadow:
+        0 8px 20px
+        rgba(233, 93, 104, 0.22);
+}
+
+
+/* =========================================
+   FORM
+   ========================================= */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #ffffff;
+
+    font-weight: 700;
+
+    font-size: 13px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+
+    padding: 13px;
+
+    color: #ffffff;
+
+    background:
+        rgba(255, 255, 255, 0.045);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.12);
+
+    border-radius: 7px;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.form-group input::placeholder {
+    color:
+        rgba(215, 220, 239, 0.45);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #2bf2b0;
+
+    background:
+        rgba(43, 242, 176, 0.035);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(43, 242, 176, 0.08);
+}
+
+
+/* =========================================
+   TITLE
+   ========================================= */
+
+.title {
+    margin-bottom: 25px;
+
+    color: #2bf2b0;
+
+    font-weight: 800;
+}
+
+
+/* =========================================
+   SUBTITLE
+   ========================================= */
+
+.subtitle {
+    color: #bfc8e5;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   STATISTICS
+   ========================================= */
+
+.stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin: 25px 0;
+}
+
+.stat {
+    background:
+        rgba(255, 255, 255, 0.035);
+
+    padding: 25px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    box-shadow:
+        0 5px 18px
+        rgba(0, 0, 0, 0.08);
+}
+
+.stat-number {
+    font-size: 32px;
+
+    font-weight: 800;
+
+    color: #2bf2b0;
+}
+
+.stat-label {
+    color: #bfc8e5;
+
+    margin-top: 5px;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   STATUS
+   ========================================= */
+
+.status-open {
+    color: #2bf2b0;
+
+    font-weight: 700;
+}
+
+.status-closed {
+    color: #ff8585;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   QR CONTAINER
+   ========================================= */
+
+.qr-container {
+    text-align: center;
+}
+
+.qr-container img {
+    max-width: 350px;
+
+    width: 80%;
+
+    padding: 10px;
+
+    background: #ffffff;
+
+    border:
+        1px solid
+        rgba(43, 242, 176, 0.25);
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.18);
+}
+
+
+/* =========================================
+   PROJECTOR
+   ========================================= */
+
+.projector {
+    text-align: center;
+
+    max-width: 1000px;
+
+    margin: 20px auto;
+}
+
+.projector h1 {
+    font-size: 40px;
+
+    color: #2bf2b0;
+
+    font-weight: 800;
+}
+
+.projector .qr-container img {
+    width: 420px;
+
+    max-width: 80vw;
+}
+
+
+/* =========================================
+   PROJECTOR COUNT
+   ========================================= */
+
+.projector-count {
+    font-size: 30px;
+
+    font-weight: 800;
+
+    color: #2bf2b0;
+}
+
+
+/* =========================================
+   TABLE
+   ========================================= */
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background:
+        rgba(255, 255, 255, 0.02);
+
+    border-radius: 8px;
+
+    overflow: hidden;
+}
+
+th {
+    background:
+        rgba(43, 242, 176, 0.07);
+
+    color: #2bf2b0;
+
+    padding: 13px;
+
+    text-align: left;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    border-bottom:
+        1px solid
+        rgba(43, 242, 176, 0.18);
+}
+
+td {
+    color: #d7dcef;
+
+    padding: 13px;
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.055);
+
+    font-size: 13px;
+}
+
+tr:hover td {
+    background:
+        rgba(43, 242, 176, 0.035);
+}
+
+
+/* =========================================
+   ALERT
+   ========================================= */
+
+.alert {
+    padding: 14px;
+
+    border-radius: 7px;
+
+    background:
+        rgba(255, 91, 91, 0.07);
+
+    color: #ffb1b1;
+
+    border:
+        1px solid
+        rgba(255, 91, 91, 0.25);
+
+    margin-bottom: 20px;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   SUCCESS
+   ========================================= */
+
+.success {
+    padding: 14px;
+
+    border-radius: 7px;
+
+    background:
+        rgba(43, 242, 176, 0.07);
+
+    color: #2bf2b0;
+
+    border:
+        1px solid
+        rgba(43, 242, 176, 0.28);
+
+    margin-bottom: 20px;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   CENTER
+   ========================================= */
+
+.center {
+    text-align: center;
+}
+
+
+/* =========================================
+   SUCCESS ICON
+   ========================================= */
+
+.success-icon {
+    width: 70px;
+
+    height: 70px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: #2bf2b0;
+
+    border:
+        2px solid #2bf2b0;
+
+    background:
+        rgba(43, 242, 176, 0.07);
+
+    font-size: 45px;
+
+    box-shadow:
+        0 0 25px
+        rgba(43, 242, 176, 0.12);
+}
+
+
+/* =========================================
+   ERROR ICON
+   ========================================= */
+
+.error-icon {
+    width: 70px;
+
+    height: 70px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: #ff8585;
+
+    border:
+        2px solid #ff7373;
+
+    background:
+        rgba(255, 91, 91, 0.07);
+
+    font-size: 45px;
+
+    box-shadow:
+        0 0 25px
+        rgba(255, 91, 91, 0.12);
+}
+
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+.footer {
+    text-align: center;
+
+    color:
+        rgba(215, 220, 239, 0.45);
+
+    padding: 20px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.04);
+}
+
+
+/* =========================================
+   ACCESSIBILITY
+   ========================================= */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline:
+        2px solid #2bf2b0;
+
+    outline-offset: 3px;
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        flex-direction: column;
+
+        gap: 12px;
+
+        padding:
+            18px 5%;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    .nav-links {
+        display: flex;
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+        gap: 5px;
+    }
+
+    .nav-links a {
+        margin: 0;
+
+        padding: 7px 11px;
+
+        font-size: 12px;
+    }
+
+    .container {
+        width: 92%;
+
+        margin: 25px auto;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 20px;
+
+        border-radius: 10px;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th,
+    td {
+        padding: 8px;
+    }
+
+    .projector h1 {
+        font-size: 28px;
+    }
+
+    .projector .qr-container img {
+        max-width: 80vw;
+    }
+
+    .button {
+        padding: 12px 18px;
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+   ========================================= */
+
+@media (max-width: 400px) {
+
+    .container {
+        width: 94%;
+    }
+
+    .hero h1 {
+        font-size: 27px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+
+    .stats {
+        gap: 12px;
+    }
+
+    .stat {
+        padding: 20px;
+    }
+
+}
+
+
+/* =========================================
+   REDUCED MOTION
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            0.01ms !important;
+    }
+
+}

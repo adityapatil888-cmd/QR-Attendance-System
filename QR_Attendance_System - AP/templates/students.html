@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Student Database</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <style>
+
+        /* =========================================
+           QR ATTENDANCE SYSTEM
+           STUDENT DATABASE PAGE
+           ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 80% 20%,
+                    rgba(38, 240, 174, 0.06),
+                    transparent 30%
+                ),
+                #303b72;
+
+            color: #ffffff;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        /* =========================================
+           NAVBAR
+           ========================================= */
+
+        .navbar {
+            width: 100%;
+
+            padding: 18px 7%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            background: transparent;
+        }
+
+
+        /* LOGO */
+
+        .logo {
+            color: #2bf2b0;
+
+            font-size: 24px;
+
+            font-weight: 800;
+
+            letter-spacing: -0.7px;
+
+            position: relative;
+        }
+
+        .logo::after {
+            content: "";
+
+            position: absolute;
+
+            width: 7px;
+            height: 7px;
+
+            background: #2bf2b0;
+
+            border-radius: 50%;
+
+            right: -11px;
+            top: 5px;
+
+            box-shadow:
+                0 0 10px rgba(43, 242, 176, 0.7);
+        }
+
+
+        /* =========================================
+           NAVIGATION
+           ========================================= */
+
+        .nav-links {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+
+            color: #d9e0f4;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            padding: 7px 14px;
+
+            border: 1px solid transparent;
+
+            border-radius: 8px;
+
+            transition:
+                color 0.25s ease,
+                background 0.25s ease,
+                border-color 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: #2bf2b0;
+
+            border-color:
+                rgba(43, 242, 176, 0.45);
+
+            background:
+                rgba(43, 242, 176, 0.06);
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================================
+           MAIN CONTAINER
+           ========================================= */
+
+        .container {
+            width: 100%;
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 25px 30px 40px;
+
+            flex: 1;
+
+            display: grid;
+
+            grid-template-columns:
+                360px 1fr;
+
+            gap: 22px;
+
+            align-items: start;
+        }
+
+
+        /* =========================================
+           CARDS
+           ========================================= */
+
+        .card {
+            width: 100%;
+
+            padding: 30px;
+
+            background:
+                rgba(255, 255, 255, 0.025);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.07);
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 15px 45px
+                rgba(0, 0, 0, 0.12);
+        }
+
+
+        /* =========================================
+           CARD ACCENT
+           ========================================= */
+
+        .card::before {
+            content: "";
+
+            display: block;
+
+            width: 45px;
+
+            height: 4px;
+
+            margin-bottom: 18px;
+
+            border-radius: 20px;
+
+            background: #2bf2b0;
+
+            box-shadow:
+                0 0 15px
+                rgba(43, 242, 176, 0.35);
+        }
+
+
+        /* =========================================
+           HEADINGS
+           ========================================= */
+
+        .card h1,
+        .card h2 {
+            color: #2bf2b0;
+
+            font-weight: 800;
+
+            letter-spacing: -0.8px;
+
+            margin-bottom: 20px;
+        }
+
+        .card h1 {
+            font-size: 30px;
+        }
+
+        .card h2 {
+            font-size: 24px;
+        }
+
+
+        /* =========================================
+           FORM
+           ========================================= */
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+
+        label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #ffffff;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        input,
+        select {
+            width: 100%;
+
+            padding: 11px 13px;
+
+            color: #ffffff;
+
+            background:
+                rgba(255, 255, 255, 0.045);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.12);
+
+            border-radius: 6px;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            transition:
+                border-color 0.25s ease,
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+
+        input::placeholder {
+            color:
+                rgba(215, 220, 239, 0.45);
+        }
+
+
+        input:focus,
+        select:focus {
+            border-color: #2bf2b0;
+
+            background:
+                rgba(43, 242, 176, 0.035);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(43, 242, 176, 0.08);
+        }
+
+
+        /* =========================================
+           DEPARTMENT DROPDOWN
+           ========================================= */
+
+        select {
+            background: #303b72;
+
+            cursor: pointer;
+
+            appearance: auto;
+        }
+
+        select option {
+            background: #303b72;
+
+            color: #ffffff;
+        }
+
+        select:invalid {
+            color:
+                rgba(215, 220, 239, 0.45);
+        }
+
+
+        /* =========================================
+           SUCCESS MESSAGE
+           ========================================= */
+
+        .success {
+            padding: 11px 13px;
+
+            margin-bottom: 18px;
+
+            color: #2bf2b0;
+
+            background:
+                rgba(43, 242, 176, 0.07);
+
+            border:
+                1px solid
+                rgba(43, 242, 176, 0.3);
+
+            border-radius: 6px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================================
+           BUTTONS
+           ========================================= */
+
+        .button {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-width: 140px;
+
+            padding: 10px 17px;
+
+            text-decoration: none;
+
+            border-radius: 6px;
+
+            background: #2bf2b0;
+
+            color: #263365;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            border: 1px solid #2bf2b0;
+
+            box-shadow:
+                0 5px 18px
+                rgba(43, 242, 176, 0.14);
+
+            cursor: pointer;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease,
+                color 0.25s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+
+            background: #52f6c2;
+
+            color: #263365;
+
+            box-shadow:
+                0 10px 25px
+                rgba(43, 242, 176, 0.25);
+        }
+
+
+        /* GREEN BUTTON */
+
+        .button-green {
+            background: transparent;
+
+            color: #2bf2b0;
+
+            border-color: #2bf2b0;
+
+            box-shadow: none;
+        }
+
+        .button-green:hover {
+            background: #2bf2b0;
+
+            color: #263365;
+
+            box-shadow:
+                0 10px 25px
+                rgba(43, 242, 176, 0.2);
+        }
+
+
+        /* RED DELETE BUTTON */
+
+        .button-red {
+            min-width: auto;
+
+            padding: 7px 12px;
+
+            color: #ff8b8b;
+
+            background:
+                rgba(255, 91, 91, 0.06);
+
+            border-color:
+                rgba(255, 91, 91, 0.35);
+
+            box-shadow: none;
+
+            font-size: 11px;
+        }
+
+        .button-red:hover {
+            color: #ffffff;
+
+            background: #e95d68;
+
+            border-color: #e95d68;
+
+            box-shadow:
+                0 7px 18px
+                rgba(233, 93, 104, 0.2);
+        }
+
+
+        /* =========================================
+           TABLE
+           ========================================= */
+
+        .card > div[style*="overflow-x:auto"] {
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 650px;
+
+            overflow: hidden;
+
+            background:
+                rgba(255, 255, 255, 0.02);
+        }
+
+
+        th {
+            padding: 12px 14px;
+
+            color: #2bf2b0;
+
+            background:
+                rgba(43, 242, 176, 0.06);
+
+            border-bottom:
+                1px solid
+                rgba(43, 242, 176, 0.18);
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            text-align: left;
+
+            white-space: nowrap;
+        }
+
+
+        td {
+            padding: 11px 14px;
+
+            color: #d7dcef;
+
+            border-bottom:
+                1px solid
+                rgba(255, 255, 255, 0.055);
+
+            font-size: 12px;
+
+            white-space: nowrap;
+        }
+
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+
+        tbody tr:hover,
+        tr:hover td {
+            background:
+                rgba(43, 242, 176, 0.035);
+        }
+
+
+        /* =========================================
+           EMPTY DATABASE
+           ========================================= */
+
+        .subtitle {
+            color: #bfc8e5;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================
+           ACCESSIBILITY
+           ========================================= */
+
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible {
+            outline:
+                2px solid #2bf2b0;
+
+            outline-offset: 3px;
+        }
+
+
+        /* =========================================
+           TABLET
+           ========================================= */
+
+        @media (max-width: 900px) {
+
+            .container {
+                grid-template-columns: 1fr;
+
+                max-width: 750px;
+            }
+
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 15px 18px;
+
+                flex-direction: column;
+
+                gap: 12px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .nav-links {
+                gap: 3px;
+            }
+
+            .nav-links a {
+                padding: 7px 10px;
+
+                font-size: 12px;
+            }
+
+            .container {
+                padding:
+                    20px 16px 30px;
+
+                gap: 16px;
+            }
+
+            .card {
+                padding: 24px 18px;
+
+                border-radius: 10px;
+            }
+
+            .card h1 {
+                font-size: 27px;
+            }
+
+            .card h2 {
+                font-size: 22px;
+            }
+
+            .button-green {
+                width: 100%;
+            }
+
+            table {
+                min-width: 600px;
+            }
+
+        }
+
+
+        /* =========================================
+           SMALL MOBILE
+           ========================================= */
+
+        @media (max-width: 400px) {
+
+            .card {
+                padding: 22px 15px;
+            }
+
+            .card h1 {
+                font-size: 25px;
+            }
+
+            .card h2 {
+                font-size: 20px;
+            }
+
+            input,
+            select {
+                font-size: 13px;
+            }
+
+        }
+
+
+        /* =========================================
+           REDUCED MOTION
+           ========================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration:
+                    0.01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    0.01ms !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        Student Database
+    </div>
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('home') }}">
+            Home
+        </a>
+
+        <a href="{{ url_for('teacher') }}">
+            Teacher
+        </a>
+
+    </div>
+
+</nav>
+
+
+<div class="container">
+
+    <!-- =========================================
+         ADD STUDENT
+         ========================================= -->
+
+    <div class="card">
+
+        <h1>
+            Add Student
+        </h1>
+
+
+        {% with messages = get_flashed_messages() %}
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                    <div class="success">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <form
+            action="{{ url_for('add_student') }}"
+            method="POST"
+        >
+
+            <!-- STUDENT NAME -->
+
+            <div class="form-group">
+
+                <label for="name">
+                    Student Name
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter student name"
+                    required
+                >
+
+            </div>
+
+
+            <!-- ROLL NUMBER -->
+
+            <div class="form-group">
+
+                <label for="roll_number">
+                    Roll Number
+                </label>
+
+                <input
+                    type="text"
+                    id="roll_number"
+                    name="roll_number"
+                    placeholder="Enter roll number"
+                    required
+                >
+
+            </div>
+
+
+            <!-- DEPARTMENT -->
+
+            <div class="form-group">
+
+                <label for="department">
+                    Department
+                </label>
+
+                <select
+                    name="department"
+                    id="department"
+                    required
+                >
+
+                    <option
+                        value=""
+                        disabled
+                        selected
+                    >
+                        Select Department
+                    </option>
+
+                    <option value="Civil Engineering">
+                        Civil Engineering
+                    </option>
+
+                    <option value="Computer Science and Engineering">
+                        Computer Science and Engineering
+                    </option>
+
+                    <option value="Electrical Engineering">
+                        Electrical Engineering
+                    </option>
+
+                    <option value="Electronics & Telecommunication Engineering">
+                        Electronics & Telecommunication Engineering
+                    </option>
+
+                    <option value="Mechanical Engineering">
+                        Mechanical Engineering
+                    </option>
+
+                    <option value="General Science Engineering">
+                        General Science Engineering
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- SUBMIT -->
+
+            <button
+                class="button button-green"
+                type="submit"
+            >
+                Add Student
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- =========================================
+         REGISTERED STUDENTS
+         ========================================= -->
+
+    <div class="card">
+
+        <h2>
+            Registered Students
+        </h2>
+
+
+        {% if students %}
+
+            <div style="overflow-x:auto;">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                #
+                            </th>
+
+                            <th>
+                                Roll Number
+                            </th>
+
+                            <th>
+                                Name
+                            </th>
+
+                            <th>
+                                Department
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for student in students %}
+
+                            <tr>
+
+                                <td>
+                                    {{ loop.index }}
+                                </td>
+
+                                <td>
+                                    {{ student["roll_number"] }}
+                                </td>
+
+                                <td>
+                                    {{ student["name"] }}
+                                </td>
+
+                                <td>
+                                    {{ student["department"] }}
+                                </td>
+
+                                <td>
+
+                                    <a
+                                        class="button button-red"
+                                        href="{{ url_for(
+                                            'delete_student',
+                                            student_id=student['id']
+                                        ) }}"
+                                        onclick="return confirm(
+                                            'Delete this student?'
+                                        );"
+                                    >
+                                        Delete
+                                    </a>
+
+                                </td>
+
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        {% else %}
+
+            <p class="subtitle">
+                No students registered yet.
+            </p>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

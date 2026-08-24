@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>QR Attendance System</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 80% 20%,
+                    rgba(38, 240, 174, 0.06),
+                    transparent 30%
+                ),
+                #303b72;
+
+            color: #ffffff;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        /* =========================================
+           NAVBAR
+           ========================================= */
+
+        .navbar {
+            width: 100%;
+            padding: 18px 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: transparent;
+        }
+
+
+        /* LOGO */
+
+        .logo {
+            color: #2bf2b0;
+
+            font-size: 24px;
+            font-weight: 800;
+
+            letter-spacing: -0.7px;
+
+            position: relative;
+        }
+
+        .logo::after {
+            content: "";
+
+            position: absolute;
+
+            width: 7px;
+            height: 7px;
+
+            background: #2bf2b0;
+
+            border-radius: 50%;
+
+            right: -11px;
+            top: 5px;
+
+            box-shadow:
+                0 0 10px rgba(43, 242, 176, 0.7);
+        }
+
+
+        /* =========================================
+           NAVIGATION LINKS
+           ========================================= */
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+
+            color: #d9e0f4;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            padding: 7px 14px;
+
+            border: 1px solid transparent;
+            border-radius: 8px;
+
+            transition:
+                color 0.25s ease,
+                background 0.25s ease,
+                border-color 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: #2bf2b0;
+
+            border-color:
+                rgba(43, 242, 176, 0.45);
+
+            background:
+                rgba(43, 242, 176, 0.06);
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================================
+           MAIN CONTAINER
+           ========================================= */
+
+        .container {
+            width: 100%;
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 25px 30px 25px;
+
+            flex: 1;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        /* =========================================
+           CARD
+           ========================================= */
+
+        .card {
+            width: 100%;
+
+            background: transparent;
+
+            border: none;
+
+            box-shadow: none;
+        }
+
+
+        /* =========================================
+           HERO SECTION
+           ========================================= */
+
+        .hero {
+            max-width: 720px;
+
+            text-align: left;
+
+            animation:
+                heroAppear 0.8s ease forwards;
+        }
+
+
+        /* GREEN ACCENT LINE */
+
+        .hero::before {
+            content: "";
+
+            display: block;
+
+            width: 52px;
+            height: 4px;
+
+            margin-bottom: 18px;
+
+            border-radius: 20px;
+
+            background: #2bf2b0;
+
+            box-shadow:
+                0 0 15px
+                rgba(43, 242, 176, 0.35);
+        }
+
+
+        /* HEADING */
+
+        .hero h1 {
+            margin-bottom: 12px;
+
+            color: #2bf2b0;
+
+            font-size:
+                clamp(38px, 6vw, 64px);
+
+            line-height: 1.05;
+
+            font-weight: 800;
+
+            letter-spacing: -2px;
+        }
+
+
+        /* DESCRIPTION */
+
+        .hero p {
+            max-width: 570px;
+
+            color: #d7dcef;
+
+            font-size: 16px;
+
+            line-height: 1.7;
+
+            font-weight: 400;
+        }
+
+
+        /* =========================================
+           BUTTONS
+           ========================================= */
+
+        .button {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-width: 160px;
+
+            margin: 6px 8px 6px 0;
+
+            padding: 12px 22px;
+
+            text-decoration: none;
+
+            border-radius: 6px;
+
+            background: #2bf2b0;
+
+            color: #263365;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            border: 1px solid #2bf2b0;
+
+            box-shadow:
+                0 5px 18px
+                rgba(43, 242, 176, 0.14);
+
+            cursor: pointer;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease,
+                color 0.25s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+
+            background: #52f6c2;
+
+            color: #263365;
+
+            box-shadow:
+                0 10px 25px
+                rgba(43, 242, 176, 0.25);
+        }
+
+        .button:active {
+            transform: translateY(0);
+        }
+
+
+        /* SECOND BUTTON */
+
+        .button-green {
+            background: transparent;
+
+            color: #2bf2b0;
+
+            border-color: #2bf2b0;
+
+            box-shadow: none;
+        }
+
+        .button-green:hover {
+            background: #2bf2b0;
+
+            color: #263365;
+
+            box-shadow:
+                0 10px 25px
+                rgba(43, 242, 176, 0.2);
+        }
+
+
+        /* =========================================
+           PROJECT CREDIT
+           ========================================= */
+
+        .project-credit {
+            margin-top: 30px;
+
+            padding-top: 18px;
+
+            border-top:
+                1px solid
+                rgba(255, 255, 255, 0.08);
+
+            text-align: center;
+        }
+
+        .project-credit .project-by {
+            color: #ffffff;
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+            margin-bottom: 5px;
+        }
+
+        .project-credit .department {
+            color: #bfc8e5;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+            margin-bottom: 12px;
+        }
+
+        .linkedin-button {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 8px 17px;
+
+            border: 1px solid
+                rgba(43, 242, 176, 0.7);
+
+            border-radius: 6px;
+
+            color: #2bf2b0;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            transition:
+                background 0.25s ease,
+                color 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .linkedin-button:hover {
+            background: #2bf2b0;
+
+            color: #263365;
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+
+        .footer {
+            width: 100%;
+
+            padding: 12px 7%;
+
+            color:
+                rgba(215, 220, 239, 0.45);
+
+            font-size: 11px;
+
+            font-weight: 600;
+
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+
+            text-align: left;
+
+            border-top:
+                1px solid
+                rgba(255, 255, 255, 0.04);
+        }
+
+
+        /* =========================================
+           ANIMATION
+           ========================================= */
+
+        @keyframes heroAppear {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        /* =========================================
+           TABLET
+           ========================================= */
+
+        @media (max-width: 768px) {
+
+            .navbar {
+                padding: 16px 5%;
+
+                flex-direction: column;
+
+                gap: 12px;
+            }
+
+            .nav-links {
+                width: 100%;
+
+                justify-content: center;
+
+                flex-wrap: wrap;
+            }
+
+            .container {
+                padding:
+                    30px 7% 35px;
+
+                align-items: flex-start;
+            }
+
+            .hero {
+                text-align: center;
+            }
+
+            .hero::before {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero h1 {
+                font-size: 44px;
+
+                letter-spacing: -1.5px;
+            }
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+
+                font-size: 15px;
+            }
+
+            .button {
+                margin: 5px 4px;
+
+                min-width: 150px;
+            }
+
+            .project-credit {
+                margin-top: 30px;
+            }
+
+            .footer {
+                text-align: center;
+
+                padding: 12px 5%;
+            }
+
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 480px) {
+
+            body {
+                min-height: 100svh;
+            }
+
+            .navbar {
+                padding: 15px 18px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .nav-links {
+                gap: 3px;
+            }
+
+            .nav-links a {
+                padding: 7px 9px;
+
+                font-size: 12px;
+            }
+
+            .container {
+                padding:
+                    25px 22px 30px;
+            }
+
+            .hero h1 {
+                font-size: 37px;
+
+                line-height: 1.08;
+
+                letter-spacing: -1px;
+            }
+
+            .hero p {
+                font-size: 14px;
+
+                line-height: 1.6;
+            }
+
+            .button {
+                width: 100%;
+
+                margin: 5px 0;
+
+                padding: 12px 18px;
+            }
+
+            .project-credit {
+                margin-top: 25px;
+
+                padding-top: 18px;
+            }
+
+            .project-credit .project-by {
+                font-size: 16px;
+            }
+
+            .project-credit .department {
+                font-size: 13px;
+            }
+
+            .linkedin-button {
+                width: 100%;
+            }
+
+            .footer {
+                font-size: 9px;
+
+                letter-spacing: 1.5px;
+
+                padding: 10px 5%;
+            }
+
+        }
+
+
+        /* =========================================
+           ACCESSIBILITY
+           ========================================= */
+
+        a:focus-visible {
+            outline:
+                2px solid #2bf2b0;
+
+            outline-offset: 4px;
+        }
+
+
+        /* =========================================
+           REDUCED MOTION
+           ========================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration:
+                    0.01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    0.01ms !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     NAVIGATION
+     ========================================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        QR Attendance
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('home') }}">
+            Home
+        </a>
+
+        <a href="{{ url_for('teacher') }}">
+            Teacher
+        </a>
+
+        <a href="{{ url_for('students') }}">
+            Student
+        </a>
+
+        <!-- FIXED: attendance endpoint does not exist -->
+        <a href="{{ url_for('teacher') }}">
+            Attendance
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================================
+     MAIN CONTENT
+     ========================================= -->
+
+<div class="container">
+
+    <div class="card hero">
+
+        <h1>
+            QR Attendance System
+        </h1>
+
+
+        <p>
+            Smart, fast and paperless classroom attendance.
+        </p>
+
+
+        <div style="height: 8px;"></div>
+
+
+        <a
+            class="button"
+            href="{{ url_for('teacher') }}"
+        >
+            Teacher Portal
+        </a>
+
+
+        <a
+            class="button button-green"
+            href="{{ url_for('students') }}"
+        >
+            Student Database
+        </a>
+
+
+        <!-- =====================================
+             PROJECT CREDIT
+             ===================================== -->
+
+        <div class="project-credit">
+
+            <div class="project-by">
+                Project by Aditya B. Patil
+            </div>
+
+            <div class="department">
+                Electrical Engineering 
+                <br>
+                Minor in Artificial Intelligence &amp; Data Science
+            </div>
+
+            <a
+                class="linkedin-button"
+                href="https://www.linkedin.com/in/aditya-patil-876b65313"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                View LinkedIn Profile
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================
+     FOOTER
+     ========================================= -->
+
+<div class="footer">
+
+    QR Attendance System . 
+    Project by Aditya B Patil .
+Electrical Engineering .
+Minor in AI & DS
+
+</div>
+
+
+</body>
+
+</html>

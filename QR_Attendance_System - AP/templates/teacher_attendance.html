@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Teacher Dashboard</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 80% 20%,
+                    rgba(38, 240, 174, 0.06),
+                    transparent 30%
+                ),
+                #303b72;
+
+            color: #ffffff;
+        }
+
+
+        /* =========================================
+           NAVBAR
+           ========================================= */
+
+        .navbar {
+            width: 100%;
+
+            padding: 18px 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            color: #2bf2b0;
+
+            font-size: 24px;
+            font-weight: 800;
+
+            letter-spacing: -0.7px;
+
+            position: relative;
+        }
+
+        .logo::after {
+            content: "";
+
+            position: absolute;
+
+            width: 7px;
+            height: 7px;
+
+            background: #2bf2b0;
+
+            border-radius: 50%;
+
+            right: -11px;
+            top: 5px;
+
+            box-shadow:
+                0 0 10px
+                rgba(43, 242, 176, 0.7);
+        }
+
+
+        /* =========================================
+           NAVIGATION
+           ========================================= */
+
+        .nav-links {
+            display: flex;
+
+            align-items: center;
+
+            gap: 6px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+
+            color: #d9e0f4;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            padding: 7px 13px;
+
+            border: 1px solid transparent;
+
+            border-radius: 8px;
+
+            transition:
+                color 0.25s ease,
+                background 0.25s ease,
+                border-color 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: #2bf2b0;
+
+            border-color:
+                rgba(43, 242, 176, 0.45);
+
+            background:
+                rgba(43, 242, 176, 0.06);
+
+            transform: translateY(-1px);
+        }
+
+
+        /* =========================================
+           MAIN CONTAINER
+           ========================================= */
+
+        .container {
+            width: 100%;
+
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 20px 30px 35px;
+        }
+
+
+        /* =========================================
+           CARD
+           ========================================= */
+
+        .card {
+            width: 100%;
+
+            padding: 25px;
+
+            margin-bottom: 16px;
+
+            background:
+                rgba(255, 255, 255, 0.025);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.07);
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 12px 35px
+                rgba(0, 0, 0, 0.12);
+        }
+
+
+        /* =========================================
+           GREEN ACCENT
+           ========================================= */
+
+        .card::before {
+            content: "";
+
+            display: block;
+
+            width: 42px;
+            height: 4px;
+
+            margin-bottom: 15px;
+
+            border-radius: 20px;
+
+            background: #2bf2b0;
+
+            box-shadow:
+                0 0 15px
+                rgba(43, 242, 176, 0.35);
+        }
+
+
+        /* =========================================
+           HEADINGS
+           ========================================= */
+
+        h1,
+        h2 {
+            color: #2bf2b0;
+
+            font-weight: 800;
+
+            letter-spacing: -0.8px;
+        }
+
+        h1 {
+            font-size: 32px;
+
+            margin-bottom: 6px;
+        }
+
+        h2 {
+            font-size: 21px;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* =========================================
+           SUBTITLE
+           ========================================= */
+
+        .subtitle {
+            color: #bfc8e5;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================================
+           STATISTICS
+           ========================================= */
+
+        .stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 14px;
+
+            margin: 20px 0;
+        }
+
+        .stat {
+            padding: 18px;
+
+            text-align: center;
+
+            background:
+                rgba(255, 255, 255, 0.035);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.07);
+
+            border-radius: 10px;
+
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease;
+        }
+
+        .stat:hover {
+            transform: translateY(-2px);
+
+            border-color:
+                rgba(43, 242, 176, 0.3);
+        }
+
+        .stat-number {
+            font-size: 28px;
+
+            font-weight: 800;
+
+            color: #2bf2b0;
+        }
+
+        .stat-label {
+            color: #bfc8e5;
+
+            margin-top: 4px;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================================
+           ATTENDANCE STATUS
+           ========================================= */
+
+        .status-open {
+            color: #2bf2b0;
+
+            font-weight: 700;
+
+            font-size: 13px;
+        }
+
+        .status-closed {
+            color: #ff8585;
+
+            font-weight: 700;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================
+           TABLE
+           ========================================= */
+
+        .table-wrapper {
+            width: 100%;
+
+            overflow-x: auto;
+
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+
+            min-width: 650px;
+
+            border-collapse: collapse;
+
+            background:
+                rgba(255, 255, 255, 0.015);
+        }
+
+        th {
+            padding: 11px 13px;
+
+            background:
+                rgba(43, 242, 176, 0.07);
+
+            color: #2bf2b0;
+
+            border-bottom:
+                1px solid
+                rgba(43, 242, 176, 0.18);
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            text-align: left;
+        }
+
+        td {
+            padding: 11px 13px;
+
+            color: #d7dcef;
+
+            border-bottom:
+                1px solid
+                rgba(255, 255, 255, 0.05);
+
+            font-size: 12px;
+        }
+
+        tr:hover td {
+            background:
+                rgba(43, 242, 176, 0.035);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+
+        /* =========================================
+           BUTTONS
+           ========================================= */
+
+        .button {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-width: 150px;
+
+            padding: 11px 18px;
+
+            margin: 4px;
+
+            text-decoration: none;
+
+            border-radius: 6px;
+
+            background: #2bf2b0;
+
+            color: #263365;
+
+            border: 1px solid #2bf2b0;
+
+            font-size: 13px;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 5px 18px
+                rgba(43, 242, 176, 0.14);
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease;
+        }
+
+        .button:hover {
+            background: #52f6c2;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(43, 242, 176, 0.25);
+        }
+
+
+        /* =========================================
+           OUTLINE BUTTON
+           ========================================= */
+
+        .button-green {
+            background: transparent;
+
+            color: #2bf2b0;
+
+            border-color: #2bf2b0;
+
+            box-shadow: none;
+        }
+
+        .button-green:hover {
+            background: #2bf2b0;
+
+            color: #263365;
+
+            box-shadow:
+                0 10px 25px
+                rgba(43, 242, 176, 0.2);
+        }
+
+
+        /* =========================================
+           CENTER
+           ========================================= */
+
+        .center {
+            text-align: center;
+        }
+
+
+        /* =========================================
+           EMPTY MESSAGE
+           ========================================= */
+
+        .empty-message {
+            color: #bfc8e5;
+
+            font-size: 14px;
+
+            padding: 10px 0;
+        }
+
+
+        /* =========================================
+           ACCESSIBILITY
+           ========================================= */
+
+        a:focus-visible {
+            outline:
+                2px solid #2bf2b0;
+
+            outline-offset: 3px;
+        }
+
+
+        /* =========================================
+           TABLET
+           ========================================= */
+
+        @media (max-width: 768px) {
+
+            .navbar {
+                padding: 16px 5%;
+
+                flex-direction: column;
+
+                gap: 12px;
+            }
+
+            .nav-links {
+                width: 100%;
+
+                justify-content: center;
+
+                flex-wrap: wrap;
+            }
+
+            .container {
+                padding:
+                    18px 7% 30px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+
+            h1 {
+                font-size: 29px;
+            }
+
+            .stats {
+                gap: 10px;
+            }
+
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 15px 18px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .nav-links {
+                gap: 3px;
+            }
+
+            .nav-links a {
+                padding: 7px 9px;
+
+                font-size: 12px;
+            }
+
+            .container {
+                padding:
+                    15px 16px 25px;
+            }
+
+            .card {
+                padding: 19px 16px;
+
+                border-radius: 10px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+
+                gap: 9px;
+            }
+
+            .stat {
+                padding: 16px;
+            }
+
+            .button {
+                width: 100%;
+
+                margin: 4px 0;
+            }
+
+            table {
+                min-width: 650px;
+            }
+
+        }
+
+
+        /* =========================================
+           REDUCED MOTION
+           ========================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration:
+                    0.01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    0.01ms !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     NAVIGATION
+     ========================================= -->
+
+<nav class="navbar">
+
+    <div class="logo">
+        QR Attendance
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="{{ url_for('teacher') }}">
+            New Session
+        </a>
+
+        <a href="{{ url_for('home') }}">
+            Home
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================================
+     MAIN CONTENT
+     ========================================= -->
+
+<div class="container">
+
+
+    <!-- =====================================
+         SESSION INFORMATION
+         ===================================== -->
+
+    <div class="card">
+
+        <h1>
+            {{ session["subject_name"] }}
+        </h1>
+
+        <p class="subtitle">
+
+            Lecture {{ session["lecture_number"] }}
+
+            |
+
+            {{ session["lecture_time"] }}
+
+        </p>
+
+
+        <div class="stats">
+
+
+            <div class="stat">
+
+                <div class="stat-number">
+                    {{ session["student_limit"] }}
+                </div>
+
+                <div class="stat-label">
+                    Total Students
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-number">
+                    {{ session["attendance_count"] }}
+                </div>
+
+                <div class="stat-label">
+                    Present
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-number">
+                    {{ remaining }}
+                </div>
+
+                <div class="stat-label">
+                    Remaining
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        {% if session["status"] == "OPEN" %}
+
+            <p class="status-open">
+                ● Attendance OPEN
+            </p>
+
+        {% else %}
+
+            <p class="status-closed">
+                ● Attendance CLOSED
+            </p>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- =====================================
+         PRESENT STUDENTS
+         ===================================== -->
+
+    <div class="card">
+
+        <h2>
+            Present Students
+        </h2>
+
+
+        {% if attendance_list %}
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <tr>
+
+                        <th>
+                            #
+                        </th>
+
+                        <th>
+                            Roll No.
+                        </th>
+
+                        <th>
+                            Name
+                        </th>
+
+                        <th>
+                            Department
+                        </th>
+
+                        <th>
+                            Time
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                    </tr>
+
+
+                    {% for student in attendance_list %}
+
+                        <tr>
+
+                            <td>
+                                {{ loop.index }}
+                            </td>
+
+                            <td>
+                                {{ student["roll_number"] }}
+                            </td>
+
+                            <td>
+                                {{ student["student_name"] }}
+                            </td>
+
+                            <td>
+                                {{ student["department"] }}
+                            </td>
+
+                            <td>
+                                {{ student["attendance_time"] }}
+                            </td>
+
+                            <td class="status-open">
+                                Present
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                </table>
+
+            </div>
+
+        {% else %}
+
+            <p class="empty-message">
+                No students have marked attendance yet.
+            </p>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- =====================================
+         ACTIONS
+         ===================================== -->
+
+    <div class="card center">
+
+        <h2>
+            Attendance Actions
+        </h2>
+
+
+        {% if excel_exists %}
+
+            <a
+                class="button button-green"
+                href="{{ url_for(
+                    'download_excel',
+                    session_id=session['session_id']
+                ) }}"
+            >
+                Download Excel
+            </a>
+
+        {% endif %}
+
+
+        <a
+            class="button"
+            href="{{ url_for(
+                'student_attendance',
+                session_id=session['session_id']
+            ) }}"
+        >
+            Student Attendance Page
+        </a>
+
+
+        <a
+            class="button"
+            href="{{ url_for(
+                'teacher_attendance',
+                session_id=session['session_id']
+            ) }}"
+        >
+            Refresh Dashboard
+        </a>
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

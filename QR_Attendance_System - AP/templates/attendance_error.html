@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Attendance Error</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <style>
+
+        /* =========================================
+           QR ATTENDANCE SYSTEM
+           ATTENDANCE ERROR PAGE
+           ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at 80% 20%,
+                    rgba(38, 240, 174, 0.06),
+                    transparent 30%
+                ),
+                #303b72;
+
+            color: #ffffff;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        /* =========================================
+           MAIN CONTAINER
+           ========================================= */
+
+        .container {
+            width: 100%;
+
+            max-width: 850px;
+
+            margin: auto;
+
+            padding: 30px;
+
+            flex: 1;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+        }
+
+
+        /* =========================================
+           CARD
+           ========================================= */
+
+        .card {
+            width: 100%;
+
+            max-width: 560px;
+
+            padding: 42px 45px;
+
+            background:
+                rgba(255, 255, 255, 0.025);
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.07);
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 15px 45px
+                rgba(0, 0, 0, 0.14);
+
+            text-align: center;
+
+            animation:
+                errorAppear 0.6s ease forwards;
+        }
+
+
+        /* =========================================
+           GREEN ACCENT
+           ========================================= */
+
+        .card::before {
+            content: "";
+
+            display: block;
+
+            width: 52px;
+
+            height: 4px;
+
+            margin: 0 auto 25px;
+
+            border-radius: 20px;
+
+            background: #2bf2b0;
+
+            box-shadow:
+                0 0 15px
+                rgba(43, 242, 176, 0.35);
+        }
+
+
+        /* =========================================
+           ERROR ICON
+           ========================================= */
+
+        .error-icon {
+            width: 70px;
+
+            height: 70px;
+
+            margin: 0 auto 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255, 91, 91, 0.08);
+
+            border:
+                2px solid
+                #ff7373;
+
+            color: #ff7373;
+
+            font-size: 36px;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 0 25px
+                rgba(255, 91, 91, 0.12);
+        }
+
+
+        /* =========================================
+           HEADING
+           ========================================= */
+
+        .card h1 {
+            color: #2bf2b0;
+
+            font-size:
+                clamp(30px, 5vw, 42px);
+
+            line-height: 1.15;
+
+            font-weight: 800;
+
+            letter-spacing: -1px;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* =========================================
+           ERROR MESSAGE
+           ========================================= */
+
+        .alert {
+            width: 100%;
+
+            padding: 14px 16px;
+
+            margin-bottom: 24px;
+
+            color: #ffd0d0;
+
+            background:
+                rgba(255, 91, 91, 0.07);
+
+            border:
+                1px solid
+                rgba(255, 91, 91, 0.28);
+
+            border-radius: 7px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================
+           BUTTON
+           ========================================= */
+
+        .button {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-width: 150px;
+
+            padding: 13px 24px;
+
+            text-decoration: none;
+
+            border-radius: 6px;
+
+            background: #2bf2b0;
+
+            color: #263365;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            border: 1px solid #2bf2b0;
+
+            box-shadow:
+                0 5px 18px
+                rgba(43, 242, 176, 0.14);
+
+            cursor: pointer;
+
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+
+            background: #52f6c2;
+
+            box-shadow:
+                0 10px 25px
+                rgba(43, 242, 176, 0.25);
+        }
+
+        .button:active {
+            transform: translateY(0);
+        }
+
+
+        /* =========================================
+           ACCESSIBILITY
+           ========================================= */
+
+        a:focus-visible {
+            outline:
+                2px solid #2bf2b0;
+
+            outline-offset: 4px;
+        }
+
+
+        /* =========================================
+           ANIMATION
+           ========================================= */
+
+        @keyframes errorAppear {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translateY(18px);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        /* =========================================
+           MOBILE
+           ========================================= */
+
+        @media (max-width: 600px) {
+
+            .container {
+                padding:
+                    20px 16px;
+            }
+
+            .card {
+                padding: 32px 20px;
+
+                border-radius: 10px;
+            }
+
+            .card::before {
+                margin-bottom: 20px;
+            }
+
+            .error-icon {
+                width: 62px;
+
+                height: 62px;
+
+                font-size: 32px;
+
+                margin-bottom: 16px;
+            }
+
+            .card h1 {
+                font-size: 29px;
+
+                letter-spacing: -0.7px;
+
+                margin-bottom: 17px;
+            }
+
+            .alert {
+                padding: 12px 13px;
+
+                font-size: 13px;
+
+                margin-bottom: 20px;
+            }
+
+            .button {
+                width: 100%;
+
+                padding: 12px 18px;
+            }
+
+        }
+
+
+        /* =========================================
+           SMALL MOBILE
+           ========================================= */
+
+        @media (max-width: 400px) {
+
+            .card {
+                padding: 28px 16px;
+            }
+
+            .card h1 {
+                font-size: 26px;
+            }
+
+        }
+
+
+        /* =========================================
+           REDUCED MOTION
+           ========================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration:
+                    0.01ms !important;
+
+                animation-iteration-count:
+                    1 !important;
+
+                transition-duration:
+                    0.01ms !important;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     MAIN CONTENT
+     ========================================= -->
+
+<div class="container">
+
+    <div class="card center">
+
+        <div class="error-icon">
+            !
+        </div>
+
+
+        <h1>
+            Attendance Error
+        </h1>
+
+
+        <div class="alert">
+
+            {{ message }}
+
+        </div>
+
+
+        <a
+            class="button"
+            href="javascript:history.back()"
+        >
+            Go Back
+        </a>
+
+    </div>
+
+</div>
+
+
+</body>
+
+</html>
